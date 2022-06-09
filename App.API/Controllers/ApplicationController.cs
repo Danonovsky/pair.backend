@@ -21,6 +21,7 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize]
+    [HttpPost("add", Name = "Add Application")]
     public async Task<IActionResult> AddApplication(AddApplication request)
     {
         var user = _accessor.HttpContext.User;
@@ -36,6 +37,7 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
+    [HttpPut("accept/{applicationId:guid}", Name = "Accept Application")]
     public async Task<IActionResult> AcceptApplication(Guid applicationId)
     {
         var application = await _db.Applications
@@ -47,6 +49,7 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
+    [HttpPut("reject/{applicationId:guid}", Name = "Reject Application")]
     public async Task<IActionResult> RejectApplication(Guid applicationId)
     {
         var application = await _db.Applications
@@ -58,6 +61,7 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet(Name = "List User's Applications")]
     public async Task<IActionResult> ListUserApplications()
     {
         var user = _accessor.HttpContext.User;
@@ -76,6 +80,7 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
+    [HttpGet("all",Name = "List All Applications")]
     public async Task<IActionResult> ListAllApplications()
     {
         var applications = await _db.Applications
@@ -92,6 +97,7 @@ public class ApplicationController : ControllerBase
     }
     
     [Authorize(Roles = "Admin")]
+    [HttpGet("accepted",Name = "List Accepted Applications")]
     public async Task<IActionResult> ListAcceptedApplications()
     {
         var applications = await _db.Applications
@@ -109,6 +115,7 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
+    [HttpGet("waiting",Name = "List Waiting Applications")]
     public async Task<IActionResult> ListWaitingApplications()
     {
         var applications = await _db.Applications
