@@ -1,0 +1,12 @@
+D:\uph\pair\project.backend\Project.Shared.Abstractions\bin\Debug\net6.0\Project.Shared.Abstractions.deps.json
+D:\uph\pair\project.backend\Project.Shared.Abstractions\bin\Debug\net6.0\Project.Shared.Abstractions.dll
+D:\uph\pair\project.backend\Project.Shared.Abstractions\bin\Debug\net6.0\ref\Project.Shared.Abstractions.dll
+D:\uph\pair\project.backend\Project.Shared.Abstractions\bin\Debug\net6.0\Project.Shared.Abstractions.pdb
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.csproj.AssemblyReference.cache
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.GeneratedMSBuildEditorConfig.editorconfig
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.AssemblyInfoInputs.cache
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.AssemblyInfo.cs
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.csproj.CoreCompileInputs.cache
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.dll
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\ref\Project.Shared.Abstractions.dll
+D:\uph\pair\project.backend\Project.Shared.Abstractions\obj\Debug\net6.0\Project.Shared.Abstractions.pdb
