@@ -8,3 +8,11 @@ public class ApiResponse<T>
     public int Code { get; set; }
     public List<Dictionary<string, string>> Messages { get; set; }
 }
+
+public class ApiResponse
+{
+    public bool Succeeded { get; set; }
+    public bool Failed => !Succeeded;
+    public int Code { get; set; }
+    public List<Dictionary<string, string>> Messages { get; set; }
+}
