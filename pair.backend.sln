@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Shared.Abstractions
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.API", "App.API\App.API.csproj", "{6FE36CD6-1FD2-4870-841A-103CE577C0EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GW.API", "GW.API\GW.API.csproj", "{F3D39260-293B-48EF-9C3F-FFEB4CA03350}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{6FE36CD6-1FD2-4870-841A-103CE577C0EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FE36CD6-1FD2-4870-841A-103CE577C0EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FE36CD6-1FD2-4870-841A-103CE577C0EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D39260-293B-48EF-9C3F-FFEB4CA03350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D39260-293B-48EF-9C3F-FFEB4CA03350}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D39260-293B-48EF-9C3F-FFEB4CA03350}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D39260-293B-48EF-9C3F-FFEB4CA03350}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FBA039EC-A57B-4EDE-9599-31D092A7E7B8} = {1485A143-1021-4C92-8D6B-19686B5BE160}
