@@ -54,9 +54,11 @@ public class AccountController : ControllerBase
         var tokenOptions = new JwtSecurityToken(
             "https://localhost:5011",
             "https://localhost:5011",
-            new List<Claim>()
+            new List<Claim>
             {
-                new Claim("id",$"{user.Id}")
+                new("id",$"{user.Id}"),
+                new("firstName",$"{user.FirstName}"),
+                new("lastName",$"{user.LastName}")
             },
             expires: DateTime.UtcNow.AddDays(1),
             signingCredentials: signinCredentials
