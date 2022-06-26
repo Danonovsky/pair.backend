@@ -8,6 +8,7 @@ public class Application
     public DateTime DateAdded { get; set; }
     public DateTime? DateFinished { get; set; }
     public string? FinalRegistrationNumber { get; set; }
+    public string? ReasonRejected { get; set; }
     public Status Status { get; set; }
 }
 

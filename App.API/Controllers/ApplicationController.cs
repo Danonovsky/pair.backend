@@ -63,13 +63,14 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("reject/{applicationId:guid}", Name = "Reject Application")]
-    public async Task<IActionResult> RejectApplication(Guid applicationId)
+    [HttpPut("reject", Name = "Reject Application")]
+    public async Task<IActionResult> RejectApplication(RejectApplication request)
     {
         var application = await _db.Applications
-            .FirstOrDefaultAsync(_ => _.Id == applicationId);
+            .FirstOrDefaultAsync(_ => _.Id == request.ApplicationId);
         if (application is null) return BadRequest("Invalid application id");
         application.Status = Status.Rejected;
+        application.ReasonRejected = request.Reason;
         await _db.SaveChangesAsync();
         return Ok();
     }
