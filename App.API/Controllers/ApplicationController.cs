@@ -21,6 +21,18 @@ public class ApplicationController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet("{applicationId:guid}")]
+    public async Task<IActionResult> GetApplication(Guid applicationId)
+    {
+        var result = await _db.Applications
+            .Include(_ => _.Vehicle)
+            .FirstOrDefaultAsync(_ => _.Id == applicationId);
+        if (result is null) return NotFound();
+        if (result.UserId != GetUserId() && IsAdmin() is false) return Unauthorized("It's not your application");
+        return Ok(result);
+    }
+
+    [Authorize]
     [HttpPost("add", Name = "Add Application")]
     public async Task<IActionResult> AddApplication(AddApplication request)
     {
@@ -137,5 +149,13 @@ public class ApplicationController : ControllerBase
         var user = _accessor.HttpContext.User;
         var id = Guid.Parse(user.Claims.FirstOrDefault(_ => _.Type == "id").Value);
         return id;
+    }
+
+    private bool IsAdmin()
+    {
+        var user = _accessor.HttpContext.User;
+        var role = user.Claims.FirstOrDefault(_ => _.Type == "Role");
+        if (role is null) return false;
+        return role.Value == "Admin";
     }
 }
