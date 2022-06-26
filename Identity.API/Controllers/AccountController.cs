@@ -58,7 +58,8 @@ public class AccountController : ControllerBase
             {
                 new("id",$"{user.Id}"),
                 new("firstName",$"{user.FirstName}"),
-                new("lastName",$"{user.LastName}")
+                new("lastName",$"{user.LastName}"),
+                new("role",$"{user.Role}")
             },
             expires: DateTime.UtcNow.AddDays(1),
             signingCredentials: signinCredentials
