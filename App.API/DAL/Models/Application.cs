@@ -6,7 +6,8 @@ public class Application
     public Guid UserId { get; set; }
     public Vehicle Vehicle { get; set; }
     public DateTime DateAdded { get; set; }
-    public DateTime DateFinished { get; set; }
+    public DateTime? DateFinished { get; set; }
+    public string? FinalRegistrationNumber { get; set; }
     public Status Status { get; set; }
 }
 

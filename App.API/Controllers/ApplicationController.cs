@@ -42,20 +42,22 @@ public class ApplicationController : ControllerBase
             Status = Status.Waiting,
             Vehicle = request.Vehicle,
             DateAdded = DateTime.UtcNow,
-            UserId = GetUserId()
+            UserId = GetUserId(),
+            FinalRegistrationNumber = request.DesiredRegistrationNumber
         });
         await _db.SaveChangesAsync();
         return Ok();
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut("accept/{applicationId:guid}", Name = "Accept Application")]
-    public async Task<IActionResult> AcceptApplication(Guid applicationId)
+    [HttpPut("accept", Name = "Accept Application")]
+    public async Task<IActionResult> AcceptApplication(AcceptApplication request)
     {
         var application = await _db.Applications
-            .FirstOrDefaultAsync(_ => _.Id == applicationId);
+            .FirstOrDefaultAsync(_ => _.Id == request.ApplicationId);
         if (application is null) return BadRequest("Invalid application id");
         application.Status = Status.Accepted;
+        application.FinalRegistrationNumber = request.RegistrationNumber;
         await _db.SaveChangesAsync();
         return Ok();
     }
