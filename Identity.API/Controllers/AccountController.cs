@@ -28,7 +28,7 @@ public class AccountController : ControllerBase
     [HttpPost("sign-up", Name = "Sign Up")]
     public async Task<IActionResult> SignUp(SignUp request)
     {
-        if (request is null) return BadRequest();
+        if (request is null) return BadRequest("Invalid client request");
         if (await _db.Users.AnyAsync(_ => _.Email == request.Email))
             return UnprocessableEntity("This email is already in use.");
         if (request.Password.Equals(request.PasswordConfirm) is false)
@@ -54,7 +54,7 @@ public class AccountController : ControllerBase
         
         var user = await _db.Users
             .FirstOrDefaultAsync(_ => _.Email == request.Email && _.Password == request.Password);
-        if (user is default(User)) return Unauthorized();
+        if (user is default(User)) return Unauthorized("No user with given credentials found.");
 
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretPAIRjwtPrivateKey"));
         var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
