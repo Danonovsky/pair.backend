@@ -20,8 +20,8 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = "https://localhost:5010",
-        ValidAudience = "https://localhost:5010",
+        ValidIssuer = "https://localhost:5011",
+        ValidAudience = "https://localhost:5011",
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretPAIRjwtPrivateKey"))
     };
 });
@@ -45,6 +45,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseCors(options =>

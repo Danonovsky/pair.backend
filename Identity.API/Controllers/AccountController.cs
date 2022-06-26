@@ -52,9 +52,9 @@ public class AccountController : ControllerBase
         var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretPAIRjwtPrivateKey"));
         var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
         var tokenOptions = new JwtSecurityToken(
-            issuer: "https://localhost:5010",
-            audience: "https://localhost:5010",
-            claims: new List<Claim>(),
+            "https://localhost:5011",
+            "https://localhost:5011",
+            new List<Claim>(),
             expires: DateTime.UtcNow.AddDays(1),
             signingCredentials: signinCredentials
             );
@@ -66,7 +66,8 @@ public class AccountController : ControllerBase
         });
     }
 
-    [HttpGet(Name="List All"), Authorize]
+    [Authorize]
+    [HttpGet(Name="List All")]
     public async Task<List<User>> ListAll()
     {
         return await _db.Users.ToListAsync();
