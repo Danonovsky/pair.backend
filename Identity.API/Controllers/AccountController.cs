@@ -18,6 +18,7 @@ namespace Identity.API.Controllers;
 public class AccountController : ControllerBase
 {
     private readonly IdentityDbContext _db;
+    private List<string> _availableRoles = new() { "User","Admin"};
 
     public AccountController(IdentityDbContext db)
     {
@@ -28,6 +29,12 @@ public class AccountController : ControllerBase
     public async Task<IActionResult> SignUp(SignUp request)
     {
         if (request is null) return BadRequest();
+        if (await _db.Users.AnyAsync(_ => _.Email == request.Email))
+            return UnprocessableEntity("This email is already in use.");
+        if (request.Password.Equals(request.PasswordConfirm) is false)
+            return UnprocessableEntity("Passwords doesn't match.");
+        if (_availableRoles.Contains(request.Role) is false)
+            return BadRequest($"Internal error. Role '{request.Role}' not found.");
         _db.Users.Add(new User
         {
             Email = request.Email,
