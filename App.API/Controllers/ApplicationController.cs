@@ -26,6 +26,7 @@ public class ApplicationController : ControllerBase
     {
         var result = await _db.Applications
             .Include(_ => _.Vehicle)
+            .Include(_ => _.UserDto)
             .FirstOrDefaultAsync(_ => _.Id == applicationId);
         if (result is null) return NotFound();
         if (CanGetAccessToApplication(result.UserId) is false) 
@@ -115,7 +116,8 @@ public class ApplicationController : ControllerBase
                 Make = _.Vehicle.Make,
                 Model = _.Vehicle.Model,
                 Status = _.Status,
-                DateAdded = _.DateAdded
+                DateAdded = _.DateAdded,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}"
             })
             .ToListAsync();
         return Ok(applications);
@@ -133,7 +135,8 @@ public class ApplicationController : ControllerBase
                 Make = _.Vehicle.Make,
                 Model = _.Vehicle.Model,
                 Status = _.Status,
-                DateAdded = _.DateAdded
+                DateAdded = _.DateAdded,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}"
             })
             .ToListAsync();
         return Ok(applications);
@@ -151,7 +154,8 @@ public class ApplicationController : ControllerBase
                 Make = _.Vehicle.Make,
                 Model = _.Vehicle.Model,
                 Status = _.Status,
-                DateAdded = _.DateAdded
+                DateAdded = _.DateAdded,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}"
             })
             .ToListAsync();
         return Ok(applications);
