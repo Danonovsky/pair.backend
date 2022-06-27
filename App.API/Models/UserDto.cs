@@ -1,5 +1,8 @@
-﻿namespace App.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace App.API.Models;
+
+[Keyless]
 public record UserDto
 {
     public string FirstName { get; set; }

@@ -1,4 +1,7 @@
-﻿namespace App.API.DAL.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using App.API.Models;
+
+namespace App.API.DAL.Models;
 
 public class Application
 {
@@ -10,6 +13,7 @@ public class Application
     public string? FinalRegistrationNumber { get; set; }
     public string? ReasonRejected { get; set; }
     public Status Status { get; set; }
+    [NotMapped] public UserDto UserDto { get; set; }
 }
 
 public enum Status

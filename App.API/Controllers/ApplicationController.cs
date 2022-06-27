@@ -28,8 +28,15 @@ public class ApplicationController : ControllerBase
             .Include(_ => _.Vehicle)
             .FirstOrDefaultAsync(_ => _.Id == applicationId);
         if (result is null) return NotFound();
-        if (result.UserId != GetUserId() && IsAdmin() is false) return Unauthorized("It's not your application");
+        if (CanGetAccessToApplication(result.UserId) is false) 
+            return Unauthorized("It's not your application");
         return Ok(result);
+    }
+
+    private bool CanGetAccessToApplication(Guid userId)
+    {
+        if (IsAdmin()) return true;
+        return userId == GetUserId();
     }
 
     [Authorize]
@@ -43,7 +50,8 @@ public class ApplicationController : ControllerBase
             Vehicle = request.Vehicle,
             DateAdded = DateTime.UtcNow,
             UserId = GetUserId(),
-            FinalRegistrationNumber = request.DesiredRegistrationNumber
+            FinalRegistrationNumber = request.DesiredRegistrationNumber,
+            UserDto = GetUser()
         });
         await _db.SaveChangesAsync();
         return Ok();
@@ -58,6 +66,7 @@ public class ApplicationController : ControllerBase
         if (application is null) return BadRequest("Invalid application id");
         application.Status = Status.Accepted;
         application.FinalRegistrationNumber = request.RegistrationNumber;
+        application.DateFinished = DateTime.UtcNow;
         await _db.SaveChangesAsync();
         return Ok();
     }
@@ -71,6 +80,7 @@ public class ApplicationController : ControllerBase
         if (application is null) return BadRequest("Invalid application id");
         application.Status = Status.Rejected;
         application.ReasonRejected = request.Reason;
+        application.DateFinished = DateTime.UtcNow;
         await _db.SaveChangesAsync();
         return Ok();
     }
