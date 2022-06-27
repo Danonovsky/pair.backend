@@ -147,6 +147,24 @@ public class ApplicationController : ControllerBase
         return Ok(applications);
     }
 
+    [Authorize(Roles = "Admin")]
+    [HttpGet("rejected",Name = "List Rejected Applications")]
+    public async Task<IActionResult> ListRejectedApplications()
+    {
+        var applications = await _db.Applications
+            .Where(_ => _.Status == Status.Rejected)
+            .Select(_ => new ApplicationListItem
+            {
+                Id = _.Id,
+                Make = _.Vehicle.Make,
+                Model = _.Vehicle.Model,
+                Status = _.Status,
+                DateAdded = _.DateAdded
+            })
+            .ToListAsync();
+        return Ok(applications);
+    }
+
     private Guid GetUserId()
     {
         var user = _accessor.HttpContext.User;
@@ -160,5 +178,15 @@ public class ApplicationController : ControllerBase
         var role = user.Claims.FirstOrDefault(_ => _.Type == "Role");
         if (role is null) return false;
         return role.Value == "Admin";
+    }
+
+    private UserDto GetUser()
+    {
+        var user = _accessor.HttpContext.User;
+        return new UserDto
+        {
+            FirstName = user.Claims.FirstOrDefault(_ => _.Type == "firstName").Value,
+            LastName = user.Claims.FirstOrDefault(_ => _.Type == "firstName").Value
+        };
     }
 }

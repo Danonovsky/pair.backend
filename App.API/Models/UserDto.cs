@@ -1,6 +1,6 @@
-﻿namespace Identity.API.Models;
+﻿namespace App.API.Models;
 
-public class UserDto
+public record UserDto
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
