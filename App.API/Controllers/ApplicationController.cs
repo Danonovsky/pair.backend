@@ -1,4 +1,5 @@
-﻿using App.API.DAL;
+﻿using System.Security.Claims;
+using App.API.DAL;
 using App.API.DAL.Models;
 using App.API.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -188,7 +189,7 @@ public class ApplicationController : ControllerBase
     private bool IsAdmin()
     {
         var user = _accessor.HttpContext.User;
-        var role = user.Claims.FirstOrDefault(_ => _.Type == "Role");
+        var role = user.Claims.FirstOrDefault(_ => _.Type == ClaimTypes.Role);
         if (role is null) return false;
         return role.Value == "Admin";
     }
