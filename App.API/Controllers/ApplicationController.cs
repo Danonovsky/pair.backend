@@ -99,7 +99,8 @@ public class ApplicationController : ControllerBase
                 Make = _.Vehicle.Make,
                 Model = _.Vehicle.Model,
                 Status = _.Status,
-                DateAdded = _.DateAdded
+                DateAdded = _.DateAdded,
+                DateFinished = _.DateFinished,
             })
             .ToListAsync();
         return Ok(applications);
@@ -117,7 +118,8 @@ public class ApplicationController : ControllerBase
                 Model = _.Vehicle.Model,
                 Status = _.Status,
                 DateAdded = _.DateAdded,
-                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}"
+                DateFinished = _.DateFinished,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}",
             })
             .ToListAsync();
         return Ok(applications);
@@ -136,7 +138,8 @@ public class ApplicationController : ControllerBase
                 Model = _.Vehicle.Model,
                 Status = _.Status,
                 DateAdded = _.DateAdded,
-                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}"
+                DateFinished = _.DateFinished,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}",
             })
             .ToListAsync();
         return Ok(applications);
@@ -155,7 +158,8 @@ public class ApplicationController : ControllerBase
                 Model = _.Vehicle.Model,
                 Status = _.Status,
                 DateAdded = _.DateAdded,
-                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}"
+                DateFinished = _.DateFinished,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}",
             })
             .ToListAsync();
         return Ok(applications);
@@ -173,7 +177,9 @@ public class ApplicationController : ControllerBase
                 Make = _.Vehicle.Make,
                 Model = _.Vehicle.Model,
                 Status = _.Status,
-                DateAdded = _.DateAdded
+                DateAdded = _.DateAdded,
+                DateFinished = _.DateFinished,
+                User = $"{_.UserDto.FirstName} {_.UserDto.LastName}",
             })
             .ToListAsync();
         return Ok(applications);

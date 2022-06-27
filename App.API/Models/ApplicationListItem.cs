@@ -9,5 +9,6 @@ public class ApplicationListItem
     public string Model { get; set; }
     public string User { get; set; }
     public DateTime DateAdded { get; set; }
+    public DateTime? DateFinished { get; set; }
     public Status Status { get; set; }
 }
