@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using App.API.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.API.Models;
 
-[Keyless]
-public record UserDto
+public class UserDto
 {
+    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
 }

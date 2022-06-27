@@ -200,7 +200,7 @@ public class ApplicationController : ControllerBase
         return new UserDto
         {
             FirstName = user.Claims.FirstOrDefault(_ => _.Type == "firstName").Value,
-            LastName = user.Claims.FirstOrDefault(_ => _.Type == "firstName").Value
+            LastName = user.Claims.FirstOrDefault(_ => _.Type == "lastName").Value
         };
     }
 }

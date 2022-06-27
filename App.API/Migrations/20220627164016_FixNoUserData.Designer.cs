@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220627155946_AddedUserBasicData")]
-    partial class AddedUserBasicData
+    [Migration("20220627164016_FixNoUserData")]
+    partial class FixNoUserData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,6 +45,9 @@ namespace App.API.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserDtoId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
@@ -52,6 +55,8 @@ namespace App.API.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserDtoId");
 
                     b.HasIndex("VehicleId");
 
@@ -88,13 +93,40 @@ namespace App.API.Migrations
                     b.ToTable("Vehicle");
                 });
 
+            modelBuilder.Entity("App.API.Models.UserDto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserDto");
+                });
+
             modelBuilder.Entity("App.API.DAL.Models.Application", b =>
                 {
+                    b.HasOne("App.API.Models.UserDto", "UserDto")
+                        .WithMany()
+                        .HasForeignKey("UserDtoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("App.API.DAL.Models.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("UserDto");
 
                     b.Navigation("Vehicle");
                 });
