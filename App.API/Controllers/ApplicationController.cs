@@ -27,6 +27,7 @@ public class ApplicationController : ControllerBase
     {
         var result = await _db.Applications
             .Include(_ => _.Vehicle)
+            .Include(_ => _.UserDto)
             .FirstOrDefaultAsync(_ => _.Id == applicationId);
         if (result is null) return NotFound();
         if (CanGetAccessToApplication(result.UserId) is false) 
