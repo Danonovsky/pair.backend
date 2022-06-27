@@ -85,17 +85,4 @@ public class AccountController : ControllerBase
     {
         return await _db.Users.ToListAsync();
     }
-
-    [Authorize]
-    [HttpGet("{userId:guid}")]
-    public async Task<IActionResult> GetUser(Guid userId)
-    {
-        var user = await _db.Users.FirstOrDefaultAsync(_ => _.Id == userId);
-        if (user is null) return NotFound();
-        return Ok(new UserDto
-        {
-            FirstName = user.FirstName,
-            LastName = user.LastName
-        });
-    }
 }
